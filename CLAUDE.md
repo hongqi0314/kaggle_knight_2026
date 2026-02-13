@@ -16,6 +16,12 @@
   - `data:` Data processing, feature engineering, or dataset changes.
   - `docs:` Documentation or log updates.
   - `chore:` Tooling, configuration, or maintenance.
+  - **Do not default to `chore:`.** Pick the most specific type (`feat|fix|data|docs|chore`) based on the actual change.
+  - **Commit messages must not be auto-prefixed with `chore:`** unless the change is truly maintenance/tooling.
+  - **No co-author trailers by default.** Do not add `Co-authored-by:` lines unless explicitly requested.
+  - **Single-author policy (default):** author/committer should be the repository owner only.
+  - **Before push, verify last commit message and author:**
+    - `git log -1 --pretty=format:'%h %s%nAuthor: %an <%ae>%nCommitter: %cn <%ce>'`
 - **Tooling:**
   - **Execution:** Always prioritize `uv run` for consistent environments.
   - **Data Processing:** Use `import polars as pl` for memory efficiency and speed. Prefer Polars' lazy API (`.lazy()`) for heavy operations.
