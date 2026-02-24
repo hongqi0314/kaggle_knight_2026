@@ -13,15 +13,34 @@ def _():
 @app.cell
 def _():
     import polars as pl
+    import numpy as np
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+    import scipy.stats as stats
 
-    DATA_DIR = "data/raw"
+    return np, pd, pl, plt, sns, stats
+
+
+@app.cell
+def _():
+    from pathlib import Path
+
+    cwd_str = str(Path(__file__).resolve().parents[1])
+    return cwd_str
+
+
+@app.cell
+def _(pl, cwd_str):
+
+    DATA_DIR = f"{cwd_str}/data/raw"
     train = pl.read_csv(f"{DATA_DIR}/train.csv")
     test = pl.read_csv(f"{DATA_DIR}/test.csv")
 
     print(f"Train shape: {train.shape}")
     print(f"Test shape:  {test.shape}")
     print(f"Target column: Premium Amount")
-    return pl, test, train
+    return test, train
 
 
 @app.cell

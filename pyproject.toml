@@ -6,10 +6,11 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "lightgbm>=4.6.0",
-    "marimo>=0.19.9",
+    "marimo>=0.19.10",
     "matplotlib>=3.10.8",
     "plotly>=6.5.2",
     "polars>=1.38.1",
+    "pyzmq>=27.1.0",
     "scikit-learn>=1.8.0",
     "xgboost>=3.1.3",
 ]
