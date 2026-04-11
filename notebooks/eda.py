@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.19.9"
+__generated_with = "0.20.4"
 app = marimo.App()
 
 
@@ -19,7 +19,7 @@ def _():
     import seaborn as sns
     import scipy.stats as stats
 
-    return np, pd, pl, plt, sns, stats
+    return (pl,)
 
 
 @app.cell
@@ -27,11 +27,12 @@ def _():
     from pathlib import Path
 
     cwd_str = str(Path(__file__).resolve().parents[1])
-    return cwd_str
+    print(f"Current working directory: {cwd_str}")
+    return (cwd_str,)
 
 
 @app.cell
-def _(pl, cwd_str):
+def _(cwd_str, pl):
 
     DATA_DIR = f"{cwd_str}/data/raw"
     train = pl.read_csv(f"{DATA_DIR}/train.csv")
@@ -62,7 +63,7 @@ def _(pl, train):
     print("NUMERIC SUMMARY (train)")
     print("=" * 60)
     print(train.select(numeric_cols).describe())
-    return numeric_cols
+    return (numeric_cols,)
 
 
 @app.cell
@@ -82,7 +83,7 @@ def _(train):
     for p in percentiles:
         val = target.quantile(p)
         print(f"  P{int(p*100):02d}:    {val:.2f}")
-    return target
+    return (target,)
 
 
 @app.cell
@@ -118,7 +119,7 @@ def _(pl, train):
             val, cnt = row
             pct = cnt / len(train) * 100
             print(f"    {str(val):<25} {cnt:>8} ({pct:.1f}%)")
-    return cat_cols
+    return (cat_cols,)
 
 
 @app.cell
@@ -160,7 +161,7 @@ def _(numeric_cols, pl, train):
     corrs.sort(key=lambda x: abs(x[1]), reverse=True)
     for col, r in corrs:
         print(f"  {col:<25} {r:>8.4f}")
-    return num_cols_no_id
+    return (num_cols_no_id,)
 
 
 @app.cell
